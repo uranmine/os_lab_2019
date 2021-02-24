@@ -1,17 +1,18 @@
-#include "revert_string.h"
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-void RevertString(char *str)
+
+extern int hello1( char *str)
 {
     int i,j;
     int lengh = strlen(str);
     char buff;
 
-    for (i=0, j=lengh-1; i<j; i++, j--)
+    for (i=0,j=lengh-1; i<j;i++,j--)
     {
         buff = str[i];
         str[i] = str[j];
         str[j] = buff;
     }
-}
 
+}
