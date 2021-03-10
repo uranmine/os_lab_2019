@@ -5,7 +5,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-
 #include <sys/time.h>
 #include <sys/types.h>
 #include <sys/wait.h>
@@ -40,18 +39,27 @@ int main(int argc, char **argv) {
         switch (option_index) {
           case 0:
             seed = atoi(optarg);
-            // your code here
-            // error handling
+            if (seed!=0)
+					printf("найден параметр с верным значением %d\n", seed);
+				else
+					printf("параметр seed не найден, пожалуйста, заполните генератор корректно\n");
+
             break;
           case 1:
             array_size = atoi(optarg);
-            // your code here
-            // error handling
+             if (array_size>0)
+					printf("найден параметр с верным значением %d\n", array_size);
+				else
+					printf("параметр array_size не найден, пожалуйста, заполните генератор корректно\n");
+
             break;
           case 2:
             pnum = atoi(optarg);
-            // your code here
-            // error handling
+            if (pnum>0 && pnum < array_size)
+
+					printf("найден параметр с верным значением %d\n", pnum);
+				else
+					printf("параметр pnum не найден, пожалуйста, заполните генератор корректно\n");
             break;
           case 3:
             with_files = true;
@@ -115,41 +123,4 @@ int main(int argc, char **argv) {
     }
   }
 
-  while (active_child_processes > 0) {
-    // your code here
-
-    active_child_processes -= 1;
-  }
-
-  struct MinMax min_max;
-  min_max.min = INT_MAX;
-  min_max.max = INT_MIN;
-
-  for (int i = 0; i < pnum; i++) {
-    int min = INT_MAX;
-    int max = INT_MIN;
-
-    if (with_files) {
-      // read from files
-    } else {
-      // read from pipes
-    }
-
-    if (min < min_max.min) min_max.min = min;
-    if (max > min_max.max) min_max.max = max;
-  }
-
-  struct timeval finish_time;
-  gettimeofday(&finish_time, NULL);
-
-  double elapsed_time = (finish_time.tv_sec - start_time.tv_sec) * 1000.0;
-  elapsed_time += (finish_time.tv_usec - start_time.tv_usec) / 1000.0;
-
-  free(array);
-
-  printf("Min: %d\n", min_max.min);
-  printf("Max: %d\n", min_max.max);
-  printf("Elapsed time: %fms\n", elapsed_time);
-  fflush(NULL);
-  return 0;
 }
